@@ -12,7 +12,7 @@ class DBManager {
 	 * @param String $aDb DB name (schema name)
 	 */
 	public function __construct($aHost,$aUser,$aPass,$aDb) {
-		// TODO: make connection to database
+		$this->aConnection = mysql_pconnect($aHost,$aUser,$aPass);
 		if (!$this->aConnection) {
 			throw new DBManagerException("Failed to connect to database host");
 		}				
@@ -25,7 +25,9 @@ class DBManager {
 	 * @return Rows returned from query, if any
 	 */
 	public function execute($aSql) {
-		// TODO: execute database query
+		if (($aResult = mysql_query($aSql,$this->aConnection))===false) {
+			throw new DBManagerException("Database operation error");
+		}
 		
 		$aRows = array();
 		// For INSERT and UPDATE mysql_query returnr true

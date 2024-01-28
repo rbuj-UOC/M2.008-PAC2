@@ -10,7 +10,10 @@ class Content {
 	}
 	
 	public function setVars($aVars) {
-		// TODO: update object attributes with $aVars
+		$this->TITLE = $aVars['TITLE'];
+		$this->ABSTRACT = $aVars['ABSTRACT'];
+		$this->BODY = $aVars['BODY'];
+		$this->LABELS = $aVars['LABELS'];
 	}
 	
 	public function getLabels() {
@@ -18,7 +21,9 @@ class Content {
 	}
 	
 	public static function getContents() {
-		// TODO: get content data from database
+		$aDBMan = new TagCloudDBManager();
+		$aSql = "SELECT * FROM CONTENT ORDER BY CREATION_DATE";
+		$aResults = $aDBMan->execute($aSql);
 		$aContents = array();
 		foreach ($aResults as $aRes) {
 			$aContent = new Content();
@@ -29,7 +34,11 @@ class Content {
 	}
 	
 	public static function getTags() {
-		// TODO: get content tags from contents in database
+		$aContents = self::getContents();
+		$aLabels = array();
+		foreach ($aContents as $aContent) {
+			$aLabels = array_merge($aLabels,explode(',', $aContent->getLabels()));
+		}
 		return $aLabels;
 	}
 }

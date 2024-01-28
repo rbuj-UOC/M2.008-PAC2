@@ -7,18 +7,51 @@
   <!--[if lt IE 8]>
     <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
-<!-- TODO: include style for littletag, mediumtag and largetag -->
+<style>
+.littletag {
+	color: #003366;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.mediumtag {
+	color: #003366;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.largetag {
+	color: #003366;
+	font-weight: bold;
+	font-size: 20px;
+}
+</style>
 <script type="text/javascript" src="js/prototype.js"></script>
 <script type="text/javascript">
 function getTagInformation() {
 	var url = 'tag.php';
-	// TODO: make AJAX request
+	var req = new Ajax.Request(url,{method:'post',parameters:null,evalJSON:'force',onComplete:processTagInformation})
 }
 
 function processTagInformation(originalRequest) {	
 	var response = originalRequest.responseText.evalJSON();
 	response.each(function(e) {
-		// TODO: add label to cloud
+		var a = document.createElement('a');
+		a.innerHTML = e.name;
+		a.href = '#';
+		if (e.freq <= 33) {
+			Element.addClassName(a,'littletag');
+		}
+		if (e.freq > 33 && e.weight <= 66) {
+			Element.addClassName(a,'mediumtag');
+		} 
+		if (e.freq > 66) {
+			Element.addClassName(a,'largetag');
+		}
+		$('cloudbox').appendChild(a);
+		var span = document.createElement('span');
+		span.innerHTML = '&nbsp;';
+		$('cloudbox').appendChild(span);
 	});
 }
 

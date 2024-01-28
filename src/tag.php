@@ -1,9 +1,8 @@
 <?
 include("config.php");
 
-// Sample tags array
-$aTags = array("politics","politics","social media","politics","social media","politics","technology","technology","politics","education","health","crisis","crisis");
-// TODO: replace sample tags array with tags array from Content class
+$aTags = Content::getTags();
+//$aTags = array("politics","politics","social media","politics","social media","politics","technology","technology","politics","education","health","crisis","crisis");
 $aCountTags = array();
 $aTotal = 0;
 foreach ($aTags as $aTag) {
