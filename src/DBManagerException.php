@@ -1,4 +1,5 @@
 <?php
-class DBManagerException extends Exception {
-	
+
+class DBManagerException extends Exception
+{
 }

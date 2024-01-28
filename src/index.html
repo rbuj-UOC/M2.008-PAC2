@@ -1,84 +1,91 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="EN">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print"> 
-  <!--[if lt IE 8]>
-    <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
-  <![endif]-->
-<style>
-.littletag {
-	color: #003366;
-	font-weight: bold;
-	font-size: 10px;
-}
+  <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <style>
+    .littletag {
+      color: #003366;
+      font-weight: bold;
+      font-size: 10px;
+    }
 
-.mediumtag {
-	color: #003366;
-	font-weight: bold;
-	font-size: 15px;
-}
+    .mediumtag {
+      color: #003366;
+      font-weight: bold;
+      font-size: 15px;
+    }
 
-.largetag {
-	color: #003366;
-	font-weight: bold;
-	font-size: 20px;
-}
-</style>
-<script type="text/javascript" src="js/prototype.js"></script>
-<script type="text/javascript">
-function getTagInformation() {
-	var url = 'tag.php';
-	var req = new Ajax.Request(url,{method:'post',parameters:null,evalJSON:'force',onComplete:processTagInformation})
-}
+    .largetag {
+      color: #003366;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+  <script type="text/javascript" src="js/prototype.js"></script>
+  <script type="text/javascript">
+    function getTagInformation() {
+      const url = 'tag.php';
+      const req = new Ajax.Request(url, { method: 'post', parameters: null, evalJSON: 'force', onComplete: processTagInformation })
+    }
 
-function processTagInformation(originalRequest) {	
-	var response = originalRequest.responseText.evalJSON();
-	response.each(function(e) {
-		var a = document.createElement('a');
-		a.innerHTML = e.name;
-		a.href = '#';
-		if (e.freq <= 33) {
-			Element.addClassName(a,'littletag');
-		}
-		if (e.freq > 33 && e.weight <= 66) {
-			Element.addClassName(a,'mediumtag');
-		} 
-		if (e.freq > 66) {
-			Element.addClassName(a,'largetag');
-		}
-		$('cloudbox').appendChild(a);
-		var span = document.createElement('span');
-		span.innerHTML = '&nbsp;';
-		$('cloudbox').appendChild(span);
-	});
-}
+    function processTagInformation(originalRequest) {
+      var response = originalRequest.responseText.evalJSON();
+      response.each(function (e) {
+        const a = document.createElement('a');
+        a.innerHTML = e.name;
+        a.href = '#';
+        if (e.freq <= 33) {
+          Element.addClassName(a, 'littletag');
+        }
+        if (e.freq > 33 && e.weight <= 66) {
+          Element.addClassName(a, 'mediumtag');
+        }
+        if (e.freq > 66) {
+          Element.addClassName(a, 'largetag');
+        }
+        $('cloudbox').appendChild(a);
+        const span = document.createElement('span');
+        span.innerHTML = '&nbsp;';
+        $('cloudbox').appendChild(span);
+      });
+    }
 
-function onLoad(e) {
-	getTagInformation();
-}
+    function onLoad(e) {
+      getTagInformation();
+    }
 
-Event.observe(window,'load',onLoad);
-</script>
-<title>Tag Cloud Generation Example</title>
+    Event.observe(window, 'load', onLoad);
+  </script>
+  <title>Tag Cloud Generation Example</title>
 </head>
+
 <body>
-<div class="container">
-<div class="span-24 last">
-<h1>Tag Cloud Example</h1>
-</div>
-<div class="span-6 border"><strong>Menu</strong><br/>
-<ul>
-<li>Home</li>
-<li>About Us</li>
-</ul></div>
-<div class="span-12 border">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
-<div id="tagcloud" class="span-6 last"><strong>Tag cloud</strong><br/>
-<div id="cloudbox" class="box">
-</div> <!-- Box -->
-</div>
-<div class="span-24">Web Development Course</div>
-</div> <!-- Container -->
+  <div class="container">
+    <div class="span-24 last">
+      <h1>Tag Cloud Example</h1>
+    </div>
+    <div class="span-6 border"><strong>Menu</strong><br />
+      <ul>
+        <li>Home</li>
+        <li>About Us</li>
+      </ul>
+    </div>
+    <div class="span-12 border">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+      deserunt mollit anim id est laborum</div>
+    <div id="tagcloud" class="span-6 last"><strong>Tag cloud</strong><br />
+      <div id="cloudbox" class="box">
+      </div> <!-- Box -->
+    </div>
+    <div class="span-24">Web Development Course</div>
+  </div> <!-- Container -->
 </body>
+
 </html>

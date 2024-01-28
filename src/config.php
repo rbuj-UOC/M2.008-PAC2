@@ -1,5 +1,7 @@
-<?
-function __autoload($aClassName) {
-	include($aClassName.".php");
+<?php
+function myAutoLoader($aClassName)
+{
+  include_once $aClassName . ".php";
 }
-?>
+
+spl_autoload_register('myAutoLoader');
